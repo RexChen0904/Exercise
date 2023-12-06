@@ -1,0 +1,47 @@
+﻿@model MVC.Models.EditViewModel
+@{
+    ViewBag.Title = "Edit Page";
+}
+
+<div class="page-container">
+    <form method="post" action="~/home/Edit/@Model.Member.Id">
+        <div class="input-row row">
+            <label>姓名:</label>
+            <input type="text" name="name" value="@Model.Member.Name" required>
+        </div>
+        <div class="input-row row">
+            <label>年齡:</label>
+            <input type="number" name="age" value="@Model.Member.Age" required>
+        </div>
+        <div class="input-row row">
+            <label>生日:</label>
+            <input type="date" name="birthday" value="@Model.Member.Birthday" required>
+        </div>
+        <div class="input-row row">
+            <button type="submit" name="submit">修改帳號</button>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年齡</th>
+                <th>生日</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model.Members)
+            {
+                <tr>
+                    <td>@member.Name</td>
+                    <td>@member.Age</td>
+                    <td>@member.Birthday</td>
+                    <td>
+                        @Html.ActionLink("修改", "Edit", new { Id = member.Id, Name = member.Name, Age = member.Age, Birthday = member.Birthday }, new { @class = "btn btn-light" })
+                        @Html.ActionLink("刪除", "Delete", new { Id = member.Id }, new { @class = "btn btn-light" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
